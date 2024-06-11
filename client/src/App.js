@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-d
 import Register from './components/Register';
 import Login from './components/Login';
 import Profile from './components/Profile';
+import FlipCard from './components/FlipCard';
 
 function App() {
   const isAuthenticated = () => {
@@ -19,6 +20,7 @@ function App() {
             path="/profile" 
             element={isAuthenticated() ? <Profile /> : <Navigate to="/login" />} 
           />
+          <Route path="/card" element={<FlipCard />} />
         </Routes>
       </div>
     </Router>

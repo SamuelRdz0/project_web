@@ -56,12 +56,6 @@ const Register = () => {
 
   return (
     <div className="max-w-md relative flex flex-col p-4 rounded-md text-black bg-white">
-      <div className="text-2xl font-bold mb-2 text-[#1e0e4b] text-center">
-        Create an account on <span className="text-[#7747ff]">App</span>
-      </div>
-      <div className="text-sm font-normal mb-4 text-center text-[#1e0e4b]">
-        Register to get started
-      </div>
       <form className="flex flex-col gap-3" onSubmit={handleRegister}>
         <div className="block relative">
           <label htmlFor="username" className="block text-gray-600 cursor-text text-sm leading-[140%] font-normal mb-2">
