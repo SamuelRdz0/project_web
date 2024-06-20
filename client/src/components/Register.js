@@ -1,17 +1,18 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useState } from "react";
+import axios from "axios";
 
 const Register = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const validatePassword = (password) => {
     const minLength = /.{8,}/;
     const hasUpperCase = /[A-Z]/;
     const hasLowerCase = /[a-z]/;
     const hasSpecialChar = /[^a-zA-Z0-9]/;
-    const noConsecutiveNumbers = /^(?!.*(\d)\1)/;
+    const noConsecutiveNumbers =
+      /^(?!.*(123|234|345|456|567|678|789|098|987|876|765|654|543|432|321|210|111))/;
     const noConsecutiveLetters = /^(?!.*([a-zA-Z])\1)/;
 
     if (!minLength.test(password)) {
@@ -37,7 +38,7 @@ const Register = () => {
 
   const handleRegister = async (e) => {
     e.preventDefault();
-    setError('');
+    setError("");
 
     const passwordError = validatePassword(password);
     if (passwordError) {
@@ -46,11 +47,16 @@ const Register = () => {
     }
 
     try {
-      const response = await axios.post('http://localhost:5000/register', { username, password });
-      localStorage.setItem('token', response.data.token);
-      alert('Usuario registrado');
+      const response = await axios.post("http://localhost:5000/register", {
+        username,
+        password,
+      });
+      localStorage.setItem("token", response.data.token);
+      alert("Usuario registrado");
     } catch (error) {
-      setError('Error al registrar usuario: ' + (error.response?.data || error.message));
+      setError(
+        "Error al registrar usuario: " + (error.response?.data || error.message)
+      );
     }
   };
 
@@ -58,7 +64,10 @@ const Register = () => {
     <div className="max-w-md relative flex flex-col p-4 rounded-md text-black bg-white">
       <form className="flex flex-col gap-3" onSubmit={handleRegister}>
         <div className="block relative">
-          <label htmlFor="username" className="block text-gray-600 cursor-text text-sm leading-[140%] font-normal mb-2">
+          <label
+            htmlFor="username"
+            className="block text-gray-600 cursor-text text-sm leading-[140%] font-normal mb-2"
+          >
             Nombre de usuario
           </label>
           <input
@@ -71,7 +80,10 @@ const Register = () => {
           />
         </div>
         <div className="block relative">
-          <label htmlFor="password" className="block text-gray-600 cursor-text text-sm leading-[140%] font-normal mb-2">
+          <label
+            htmlFor="password"
+            className="block text-gray-600 cursor-text text-sm leading-[140%] font-normal mb-2"
+          >
             Contraseña
           </label>
           <input
@@ -84,7 +96,10 @@ const Register = () => {
           />
         </div>
         {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
-        <button type="submit" className="bg-[#7747ff] w-max m-auto px-6 py-2 rounded text-white text-sm font-normal">
+        <button
+          type="submit"
+          className="bg-[#7747ff] w-max m-auto px-6 py-2 rounded text-white text-sm font-normal"
+        >
           Registrar
         </button>
       </form>
